@@ -1,8 +1,8 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-//头部方式插入节点
 
+//向链表的中部插入节点
 struct Node1
 {
     char name[30];
@@ -11,43 +11,43 @@ struct Node1
 
 typedef struct Node1 Node;
 
+void PrintList(Node *pHead);
 
 int main()
 {
-    Node *pHead = NULL;
-    while(1)
+    //定义一条链表，两个节点A和B
+    Node A;
+    strcpy(A.name,"学生A");
+    Node B;
+    strcpy(B.name,"学生B");
+
+    A.next = &B;
+    B.next = NULL;
+
+    PrintList(&A);
+
+    //在A和B之间插入一个新节点
+    Node C;
+    strcpy(C.name,"学生C");
+
+    //知道要插入节点的前后地址情况下
+//    A.next = &C;
+//    C.next = &B;
+//    PrintList(&A);
+
+    //只知道插入节点的前一个节点
+//    C.next = (&A)->next;
+    C.next = A.next;
+     A.next = &C;
+     PrintList(&A);
+}
+
+void PrintList(Node *pHead)
+{
+    while(pHead != NULL)
     {
-        printf("请输入学生,q(退出系统),p(打印)\n");
-        char name[30];
-        scanf("%s",name);
-
-        //退出系统
-        if(strcmp(name,"q")==0)
-        {
-           printf("退出系统\n");
-           break;
-        }
-
-        //打印信息
-        if(strcmp(name,"p")==0)
-        {
-           Node *pNode = pHead;
-           while(pNode !=NULL)
-           {
-               printf("%s     ",pNode->name);
-               pNode = pNode->next;
-           }
-           printf("\n");
-        }
-
-        else
-        {
-            Node *pNode = (Node *)malloc(sizeof(Node));
-            pNode ->next = pHead;   //让新节点的下一个指向 之前链表的头节点
-            strcpy(pNode->name,name);
-            pHead = pNode;
-        }
+        printf("%s    ",pHead->name);
+        pHead = pHead->next;
     }
-
-
+    printf("\n");
 }
