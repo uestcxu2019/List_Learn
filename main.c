@@ -14,7 +14,10 @@
 int main()
 {
     Node *p;
-    p = CreateList(5);
+    p = CreateList(1);
     PrintList(p);
-    p =DeleteList(p);
+
+    p = DeleteList(p);
+
+    PrintList(p);
 }
