@@ -1,14 +1,13 @@
 # depslib dependency file v1.0
-1557130417 source:d:\program files\code_block_workspace\list_learn\main.c
+1557136285 source:d:\program files\code_block_workspace\list_learn\main.c
 	<stdio.h>
 	<stdlib.h>
 	<string.h>
 	"list.h"
 
-1557131081 source:d:\program files\code_block_workspace\list_learn\list.c
-	"list.h"
+1557136234 source:d:\program files\code_block_workspace\list_learn\list.c
 
-1557129732 d:\program files\code_block_workspace\list_learn\list.h
+1557136233 d:\program files\code_block_workspace\list_learn\list.h
 	<stdio.h>
 	<stdlib.h>
 	<string.h>
