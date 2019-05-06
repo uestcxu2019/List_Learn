@@ -4,9 +4,9 @@
 #include "list.h"
 
 /*
- * Author: ÁõĞñÖ¥
+ * Author: Î‘Ï…Î ÏÎ¦Â¥
  * Date: 2019.05.04
- * É¾³ıÁ´±íÎ²²¿½Úµã
+ * åˆ é™¤é“¾è¡¨ä¸­éƒ¨èŠ‚ç‚¹
 */
 
 
@@ -17,7 +17,11 @@ int main()
     p = CreateList(1);
     PrintList(p);
 
-    p = DeleteList(p);
+    p = DeleteList(p,"å­¦ç”Ÿ1");
+
+    PrintList(p);
+
+    p = DeleteList(p,"å­¦ç”Ÿ1");
 
     PrintList(p);
 }

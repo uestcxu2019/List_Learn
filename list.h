@@ -6,18 +6,15 @@
 #include <string.h>
 
 //向链表的中部插入节点
-struct Node1
+typedef struct Node1
 {
     char name[30];
     struct Node1 *next;
-};
-
-typedef struct Node1 Node;
-
+}Node;
 
 Node *CreateList(int N);
 void PrintList(Node *pHead);
-Node *DeleteList(Node *phead);
+Node *DeleteList(Node *phead,const char *name);
 
 
 
