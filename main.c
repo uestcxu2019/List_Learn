@@ -5,16 +5,14 @@
 
 /*
  * Author: 刘旭芝
- * Date: 2019.05.06
- * 向单向循环链表尾部插入新的节点
+ * Date: 2019.05.09
+ * 向单向循环链表头部插入新的节点
  *
- *  步骤；
- *      1.用户每输入一次，动态产生一个节点
- *      2.给节点域数据赋值然后将头部指针指向新节点，将尾部指针的next指向新节点
- *      3.将新节点的next指向原来的头部节点,
+ *
 **/
 
-//定义一个节点结构体
+
+//定义一个节点
 typedef struct Node1
 {
     char name[30];
@@ -22,56 +20,56 @@ typedef struct Node1
 }Node;
 
 
-int main(void)
+int main()
 {
-    Node *pHead = NULL; //定义一个初始化为空的头节点，用于遍历
-    Node *pTail = NULL; //定义一个初始化为空的尾节点，用于插入新节点
-    char name[30];
+    Node *pHead = NULL;
+    Node *pTail = NULL;
 
     while(1)
     {
-        printf("请输入学生姓名: q(退出系统),p(打印)\n");
+        printf("请输入学生姓名:q(退出系统)，p(打印)\n");
+        char name[30];
         scanf("%s",name);
-
-        //退出系统
         if(strcmp(name,"q") == 0)
         {
-            printf("已退出系统\n");
+            printf("已退出系统");
             break;
         }
+        //打印链表
         if(strcmp(name,"p") == 0)
         {
-            Node *pNode = pHead;
-
+            Node *pTemp = pHead;
+            //遍历链表
             do
             {
-                if(pNode != NULL)
+                if(pTemp != NULL)
                 {
-                    printf("%s   ",pNode ->name);
-                   pNode = pNode ->next;
+                    printf("%s  ",pTemp ->name);
+                    pTemp = pTemp ->next;
                 }
             }
-            while(pNode != pHead);
+            while(pTemp != pHead);
             printf("\n");
         }
+        //节点插入
         else
         {
             Node *pNode = (Node *)malloc(sizeof(Node));
-            pNode ->next = pHead;
             strcpy(pNode ->name,name);
-            if(pHead == NULL)//判定为空链表
+
+            //判定是否是头节点
+            if(pHead == NULL)
             {
                 pHead = pTail = pNode;
-                pNode ->next =pHead;    //形成一个回环
+                pTail ->next = pHead;
             }
             else
             {
-                pTail ->next = pNode;
-                pNode ->next = pHead;
-                pTail = pNode;
+                pNode ->next = pHead;   //让新节点的next指向原头节点
+                pHead = pNode;  //让新节点作为新的头节点
+                pTail ->next = pHead;   //让尾节点的next指向新头节点
             }
         }
-
     }
 }
 
