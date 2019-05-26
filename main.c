@@ -6,7 +6,7 @@
 /*************************************************************
  * Author: 刘旭芝
  * Date: 2019.05.26
- * 初步接触双向链表，构建一条最简单的双向链表，并且正反打印信息
+ * 向双向链表尾部插入新的节点(尾插法)
 *************************************************************/
 
 
@@ -20,42 +20,58 @@ typedef struct Node1
 
 int main()
 {
-    //创建三个节点
-    Node stu1,stu2,stu3;
-
-    //节点赋值
-    strcpy(stu1.name,"学生A");
-    strcpy(stu2.name,"学生B");
-    strcpy(stu3.name,"学生C");
-
-    //串联成一个简单的双向链表
-    stu1.prev = NULL;
-    stu1.next = &stu2;
-
-    stu2.prev = &stu1;
-    stu2.next = &stu3;
-
-    stu3.prev = &stu2;
-    stu3.next = NULL;
-
-
-    //正向打印链表
-    Node *phead = &stu1;
-    while(phead)
+    Node *pHead = NULL;
+    Node *pTail = NULL;
+    char name[30];
+    while(1)
     {
-        printf("%s  ",phead ->name);
-        phead = phead ->next;
-    }
-    printf("\n");
+        printf("请输入学生姓名，q(退出)，p(打印)\n");
+        scanf("%s",name);
+        if(strcmp(name,"q") == 0)
+        {
+            printf("已退出系统");
+            break;
+        }
+        else if(strcmp(name,"p") == 0)
+        {
+            Node *pTemp = pHead;
 
-    //反向打印链表
-    Node *pTail = &stu3;
-    while(pTail)
-    {
-       printf("%s  ",pTail ->name);
-       pTail = pTail ->prev;
-    }
+            //正向打印
+            while(pTemp)
+            {
+                printf("%s  ",pTemp ->name);
+                pTemp = pTemp -> next;
+            }
+            printf("\n");
 
-    return 0;
+            //反向打印
+            pTemp = pTail;
+            while(pTemp)
+            {
+                printf("%s  ",pTemp ->name);
+                pTemp = pTemp -> prev;
+            }
+            printf("\n");
+        }
+        else    //添加节点
+        {
+            Node *pNode = (Node *)malloc(sizeof(Node));
+            strcpy(pNode ->name,name);
+            pNode ->prev = NULL;
+            pNode ->next = NULL;
+
+            //初始链表为空
+            if(pHead == NULL)
+            {
+                pHead = pTail = pNode;
+            }
+            else
+            {
+                pTail ->next = pNode;
+                pNode -> prev = pTail;
+                pTail = pNode;
+            }
+        }
+    }
 }
 
