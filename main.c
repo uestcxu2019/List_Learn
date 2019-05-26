@@ -6,11 +6,11 @@
 /*************************************************************
  * Author: 刘旭芝
  * Date: 2019.05.16
- * 删除单向循环链表尾部节点
+ * 删除单向循环链表头部节点
  *          步骤:
- *              1.遍历链表，找到尾部节点的前一个节点
- *              2.删除尾部节点(如果是malloc内存，要free)
- *              3.将新尾部节点的next指向头节点
+ *              1.遍历链表，找到最后一个节点
+ *              2.删除头部节点(如果是malloc内存，要free)
+ *              3.头指针指向新头节点，将尾节点的next指向新头节点
 *************************************************************/
 
 
@@ -67,28 +67,33 @@ Node *PrintList(Node *phead)
 }
 
 
-
-//删除链表尾部节点函数
+//删除链表头部节点函数，传入参数为链表头节点指针
 Node *DeleteList(Node *phead)
 {
-    //找到链表的倒数第二个节点
-    Node *pNode = phead;
-
+    Node *pTemp = phead;
     //链表只有一个节点的情况
-    if(phead == NULL)
+    if(phead ->next == phead)
     {
         free(phead);
+        printf("唯一节点已删除,当前链表为空链表\n");
         return NULL;
     }
-    while(pNode ->next ->next != phead)
-    {
-        pNode = pNode ->next;
-    }
-    printf("找到倒数第二个节点是:   %s\n",pNode->name);
 
-    //删除最后一个节点
-    free(pNode ->next);
-    pNode ->next = phead;
+    //遍历链表，找到尾部节点
+    while(pTemp ->next != phead)
+    {
+        pTemp = pTemp ->next;
+    }
+    printf("找到尾节点是:   %s\n",pTemp->name);
+
+    //将原链表的第二个节点作为新的节点
+    phead = phead ->next;
+
+    //删除头部节点(尾节点指向的下一个节点即为原头节点)
+    free(pTemp ->next);
+
+    //尾节点的next指向新的头节点
+    pTemp ->next = phead;
 
     return phead;
 }
@@ -96,14 +101,8 @@ Node *DeleteList(Node *phead)
 int main()
 {
     Node *p = NULL;
-    p = CreateList(3);
+    p = CreateList(1);
     p = PrintList(p);
-    p = DeleteList(p);
-
-    p = PrintList(p);
-    p = DeleteList(p);
-    p = PrintList(p);
-
     p = DeleteList(p);
     p = PrintList(p);
 }
