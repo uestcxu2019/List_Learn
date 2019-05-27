@@ -5,8 +5,8 @@
 
 /*************************************************************
  * Author: 刘旭芝
- * Date: 2019.05.26
- * 向双向链表尾部插入新的节点(尾插法)
+ * Date: 2019.05.27
+ * 向双向链表头部插入新的节点(头插法)
 *************************************************************/
 
 
@@ -21,7 +21,6 @@ typedef struct Node1
 int main()
 {
     Node *pHead = NULL;
-    Node *pTail = NULL;
     char name[30];
     while(1)
     {
@@ -43,15 +42,6 @@ int main()
                 pTemp = pTemp -> next;
             }
             printf("\n");
-
-            //反向打印
-            pTemp = pTail;
-            while(pTemp)
-            {
-                printf("%s  ",pTemp ->name);
-                pTemp = pTemp -> prev;
-            }
-            printf("\n");
         }
         else    //添加节点
         {
@@ -60,16 +50,16 @@ int main()
             pNode ->prev = NULL;
             pNode ->next = NULL;
 
-            //初始链表为空
+            //初始链表为空的情况
             if(pHead == NULL)
             {
-                pHead = pTail = pNode;
+                pHead = pNode;
             }
             else
             {
-                pTail ->next = pNode;
-                pNode -> prev = pTail;
-                pTail = pNode;
+                pNode ->next = pHead;   //新的节点的next指向原头节点
+                pHead -> prev = pNode;  //原头节点的prev指向新节点
+                pHead = pNode;          //头节点指向新的节点
             }
         }
     }
